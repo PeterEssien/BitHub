@@ -108,5 +108,13 @@ perfect my skills in **backend development.**
 ### Screenshots from almost finished project
 
 ***BitHub timeline***![alt text](https://i.ibb.co/DYbdqHv/Screenshot-20211024-152530.png)
+
 ***Chat with other Bittnobbers***![alt text](https://i.ibb.co/JcqPWtg/Screenshot-20211024-152543.png)
+
 ***Bitnob freelancer displaying his services for hire***![alt text](https://i.ibb.co/kDZgmKR/Screenshot-20211024-152512.png)
+
+### TODO 
+##### Due to the limited time and nature of the Hackerthon which states we create an MVP here is what i intend on adding later
+- [ ] Make project cross platform (IOS & Web Version)
+- [ ] Add ability to comments on post
+- [ ] Add video and voice call to chats
