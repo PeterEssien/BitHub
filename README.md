@@ -1,7 +1,6 @@
-# BitHub
-My project for the Bitnob Hackathon
+Hackerthon Topic: ###BUILDIING THE NEXT BIG THING IN BITCOIN###
 
-BUILDIING THE NEXT BIG THING IN BITCOIN
+Aim of hackerthon: ####To solve a key social or economic issue for Africans####
 
 Firstly, I would like to thank the team over at Bitnob for 
 providing this opportunity for me to showcase what I think are 
@@ -12,13 +11,13 @@ her) for introducing me to Bitnob and this hackathon.
 TEAM MEMBERS
 1. Peter Offiong Essien 
 
-⚫ Front-end/Mobile developer
+- Front-end/Mobile developer
 
-⚫ Back-end developer
+- Back-end developer
 
-⚫ Product designer
+- Product designer
 
-⚫ Writer of this extremely long message(if it counts lol) 
+- Writer of this extremely long message(if it counts lol) 
 If you refer to me as a jack of all trades; you are absolutely right.
 
 THE PROBLEM;
@@ -29,8 +28,8 @@ Unemployment in Africa is currently at an all-time
 high.Countries like South Africa and Nigeria sit at the top of
 Countries with the highest unemployment rates.This doesn’t 
 tell well especially of the latter’s status as the ‘Giant of Africa’ 
-This brings me to the first problem “Africa and the problem of 
-unemployment”
+This brings me to the first problem ***“Africa and the problem of 
+unemployment”***
 Lets now dive into the Social Problem;
 This is the 21st century and it’s really sad that we find 
 ourselves living in a society where our basic and fundamental 
@@ -40,9 +39,9 @@ is quite true but a lookup of stats from the United Nations
 proof that Africa compared to it’s European & American 
 counterparts are leaning behind in terms of recognizing our 
 basic human rights.
-This brings me to the second problem “Africa and the 
+This brings me to the second problem ***“Africa and the 
 challenges of providing a safe environment for BITCOIN 
-investors” 
+investors”***
 You may be wondering what the connection between Human 
 rights and A safe environment for bitcoin investors is? The 
 answer is Human left (I hope that joke put a smile on your face).
@@ -74,15 +73,15 @@ breach the gap between Bitcoin investors and other Bitcoin
 investors; the idea of this app is to enable Bitnobbers(an
 unofficial name I call Bitnob users) 
 
-⚫ Communicate with each other through private chat.
+- Communicate with each other through private chat.
 
-⚫ Post on the timeline which can be read by other users.
+- Post on the timeline which can be read by other users.
 
-⚫ Provide a platform for freelance Bitnobbers to showcase 
+- Provide a platform for freelance Bitnobbers to showcase 
 their services to other users and get paid in Bitcoin
 (Reducing unemployment in Africa).
 
-⚫ Send and request Bitcoin easily from other users powered 
+- Send and request Bitcoin easily from other users powered 
 by the Bitnob API.
 In respect to the the Hackathon instructions which states we 
 should build a minimum viable products (MVP) ,the first release 
