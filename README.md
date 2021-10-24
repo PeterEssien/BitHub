@@ -1,6 +1,6 @@
-Hackerthon Topic: ###BUILDIING THE NEXT BIG THING IN BITCOIN###
+Hackerthon Topic: ### BUILDIING THE NEXT BIG THING IN BITCOIN
 
-Aim of hackerthon: ####To solve a key social or economic issue for Africans####
+Aim of hackerthon: #### To solve a key social or economic issue for Africans
 
 Firstly, I would like to thank the team over at Bitnob for 
 providing this opportunity for me to showcase what I think are 
