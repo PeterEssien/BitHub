@@ -107,6 +107,6 @@ perfect my skills in **backend development.**
 
 ### Screenshots from almost finished project
 
-![alt text](https://i.ibb.co/DYbdqHv/Screenshot-20211024-152530.png)
-![alt text](https://i.ibb.co/JcqPWtg/Screenshot-20211024-152543.png)
-![alt text](https://i.ibb.co/kDZgmKR/Screenshot-20211024-152512.png)
+***BitHub timeline***![alt text](https://i.ibb.co/DYbdqHv/Screenshot-20211024-152530.png)
+***Chat with other Bittnobbers***![alt text](https://i.ibb.co/JcqPWtg/Screenshot-20211024-152543.png)
+***Bitnob freelancer displaying his services for hire***![alt text](https://i.ibb.co/kDZgmKR/Screenshot-20211024-152512.png)
