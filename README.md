@@ -105,6 +105,8 @@ Lastly I would like to re-echo my gratitude to Bitnob for
 providing me this platform, as it presented me the opportunity to learn an entirely new programming language **(Java)** and also
 perfect my skills in **backend development.**
 
+### Screenshots from almost finished project
+
 ![alt text](https://i.ibb.co/DYbdqHv/Screenshot-20211024-152530.png)
 ![alt text](https://i.ibb.co/JcqPWtg/Screenshot-20211024-152543.png)
 ![alt text](https://i.ibb.co/kDZgmKR/Screenshot-20211024-152512.png)
