@@ -118,3 +118,4 @@ perfect my skills in **backend development.**
 - [ ] Make project cross platform (IOS & Web Version)
 - [ ] Add ability to comments on post
 - [ ] Add video and voice call to chats
+- [x] Design a professional logo
