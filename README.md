@@ -11,11 +11,16 @@ go to my very good friend Theodora (Theo as I would fondly call
 her) for introducing me to Bitnob and this hackathon.
 TEAM MEMBERS
 1. Peter Offiong Essien 
+
 ⚫ Front-end/Mobile developer
+
 ⚫ Back-end developer
+
 ⚫ Product designer
+
 ⚫ Writer of this extremely long message(if it counts lol) 
 If you refer to me as a jack of all trades; you are absolutely right.
+
 THE PROBLEM;
 My MVP aims to tackle two major issues which would be 
 divided into economic and social problems.
@@ -68,11 +73,15 @@ alternatively make use of the the BitHub App that seeks to
 breach the gap between Bitcoin investors and other Bitcoin 
 investors; the idea of this app is to enable Bitnobbers(an
 unofficial name I call Bitnob users) 
+
 ⚫ Communicate with each other through private chat.
+
 ⚫ Post on the timeline which can be read by other users.
+
 ⚫ Provide a platform for freelance Bitnobbers to showcase 
 their services to other users and get paid in Bitcoin
 (Reducing unemployment in Africa).
+
 ⚫ Send and request Bitcoin easily from other users powered 
 by the Bitnob API.
 In respect to the the Hackathon instructions which states we 
@@ -80,4 +89,6 @@ should build a minimum viable products (MVP) ,the first release
 of this app wouldn't be cross platform and i intend on creating 
 an android version first.
 Lastly I would like to re-echo my gratitude to Bitnob for 
-providing me this platform, as it presented me the opportunity 
+providing me this platform, as it presented me the opportunity to learn an entirely new programming language (Java) and also
+
+perfect my skills in backend development. 
