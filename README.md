@@ -11,17 +11,6 @@ play a vital role in tackling those issues.Special thanks must also
 go to my very good friend Theodora (Theo as I would fondly call 
 her) for introducing me to Bitnob and this hackathon.
 
-### TEAM MEMBERS
-1. Peter Offiong Essien 
-
-- Front-end/Mobile developer
-
-- Back-end developer
-
-- Product designer
-
-- Writer of this extremely long message(if it counts lol) 
-If you refer to me as a jack of all trades; you are absolutely right.
 
 ### THE PROBLEM;
 
@@ -115,8 +104,12 @@ perfect my skills in **backend development.**
 
 ***Bitnob freelancer displaying his services for hire***![alt text](https://i.ibb.co/kDZgmKR/Screenshot-20211024-152512.png)
 
+### OBSERVATIONS
+##### At the moment it's not possible to fund account using the Bitnob API and i think the manual process of going to the Bitnob app is a little time consuming; i would like to plead with Bitnob to make this functionality available on their API
+
 ### TODO 
 ##### Due to the limited time and nature of the Hackerthon which states we create an MVP here is what i intend on adding later
+- [ ] Ability for users to add to their story
 - [ ] Make project cross platform (IOS & Web Version)
 - [ ] Add ability to comments on post
 - [ ] Add video and voice call to chats
