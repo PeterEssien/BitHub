@@ -110,7 +110,7 @@ perfect my skills in **backend development.**
 ### TODO 
 ##### Due to the limited time and nature of the Hackerthon which states we create an MVP here is what i intend on adding later
 - [ ] Ability for users to add to their story
-- [ ] Users can create and join groups
+- [ ] Users can create both private and public chat groups
 - [ ] Make project cross platform (IOS & Web Version)
 - [x] Add ability to comments on post
 - [ ] Add video and voice call to chats
