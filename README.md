@@ -115,6 +115,3 @@ perfect my skills in **backend development.**
 - [x] Add ability to comments on post
 - [ ] Add video and voice call to chats
 - [x] Design a professional logo
-
-
-[![Watch the video](https://share.gifyoutube.com/vQmLxM.gif)](https://youtu.be/qGRDNem-AS4)
