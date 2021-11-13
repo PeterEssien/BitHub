@@ -117,4 +117,4 @@ perfect my skills in **backend development.**
 - [x] Design a professional logo
 
 #### Here is an introductory video to explain the BitHub App 👇👇
-[![BitHub Intro](https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg)](https://youtu.be/qGRDNem-AS4 "BitHub intro")
+[![BitHub Intro](https://i.ibb.co/ygGMW2D/Screenshot-20211113-104818.png)](https://youtu.be/qGRDNem-AS4 "BitHub intro")
