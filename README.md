@@ -115,3 +115,6 @@ perfect my skills in **backend development.**
 - [x] Add ability to comments on post
 - [ ] Add video and voice call to chats
 - [x] Design a professional logo
+
+#### Here is an introductory video to explain the BitHub App 👇👇
+[![BitHub Intro](https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg)](https://youtu.be/qGRDNem-AS4 "BitHub intro")
