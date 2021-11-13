@@ -117,4 +117,4 @@ perfect my skills in **backend development.**
 - [x] Design a professional logo
 
 
-[![Watch the video](https://img.youtube.com/vi/qGRDNem-AS4/maxresdefault.jpg)](https://youtu.be/qGRDNem-AS4)
+[![Watch the video](https://share.gifyoutube.com/vQmLxM.gif)](https://youtu.be/qGRDNem-AS4)
