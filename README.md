@@ -15,7 +15,7 @@ her) for introducing me to Bitnob and this hackathon.
 ### THE PROBLEM;
 
 #### My MVP aims to tackle two major issues which would be 
-divided into economic and social problems.
+divided into **economic** and **social** problems.
 
 Lets start with the **Economic Problem;**
  Unemployment in Africa is currently at an all-time 
