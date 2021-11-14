@@ -113,7 +113,7 @@ perfect my skills in **backend development.**
 - [ ] Users can create both private and public chat groups
 - [ ] Make project cross platform (IOS & Web Version)
 - [x] Add ability to comments on post
-- [ ] Add video and voice call to chats
+- [x] Add video and voice call to chats
 - [x] Design a professional logo
 
 #### Here is an introductory video to explain the BitHub App 👇👇
