@@ -104,6 +104,8 @@ perfect my skills in **backend development.**
 
 ***Bitnob freelancer displaying his services for hire***![alt text](https://i.ibb.co/kDZgmKR/Screenshot-20211024-152512.png)
 
+[Here is the team responsible for making this amazing project](https://bithubapp.herokuapp.com/)
+
 ### OBSERVATIONS
 ##### At the moment it's not possible to fund account using the Bitnob API and i think the manual process of going to the Bitnob app is a little time consuming; i would like to plead with Bitnob to make this functionality available through their API
 
