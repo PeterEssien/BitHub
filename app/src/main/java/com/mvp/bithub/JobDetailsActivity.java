@@ -628,7 +628,7 @@ public class JobDetailsActivity extends AppCompatActivity {
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						SketchwareUtil.showMessage(getApplicationContext(), "Bitcoin sent successfully !");
+						SketchwareUtil.showMessage(getApplicationContext(), "✅");
 						_Custom_Loading(false);
 						t.cancel();
 					}

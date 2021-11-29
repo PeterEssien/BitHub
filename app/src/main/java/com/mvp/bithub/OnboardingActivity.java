@@ -182,7 +182,7 @@ public class OnboardingActivity extends AppCompatActivity {
 					b1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/en_medium.ttf"), 0);
 					b2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/en_medium.ttf"), 0);
 					t1.setText("One Last Thing !");
-					t2.setText("Hey Bitnobber, If you don't mind can you take a minute or two to read the extremely long documentary on how this amazing app was made and its purpose?");
+					t2.setText("Hey Bitnobber, If you don't mind can you take a minute or two to read the extremely long documentary on the purpose of this app and how it aims to solve some key problems in Africa?");
 					b1.setText("Later");
 					b2.setText("Ok");
 					_rippleRoundStroke(bg, "#212D3B", "#000000", 15, 0, "#000000");

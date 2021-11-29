@@ -245,7 +245,7 @@ public class DashboardActivity extends AppCompatActivity {
 				LinearLayout.LayoutParams lpar = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 				amount.setLayoutParams(lpar);
 				dialog.setView(amount);
-				dialog.setPositiveButton("Withdraw", new DialogInterface.OnClickListener() {
+				dialog.setPositiveButton("WITHDRAW", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface _dialog, int _which) {
 						try{
@@ -518,15 +518,21 @@ public class DashboardActivity extends AppCompatActivity {
 					dialog1.setCancelable(true);
 					dialog1.show();
 				}
-				if (lmap.get((int)_position).get("type").toString().equals("Claim Payment")) {
+				if (lmap.get((int)_position).get("type").toString().equals("Claim Payment") || lmap.get((int)_position).get("type").toString().equals("Claim Donation")) {
 					map4 = new HashMap<>();
 					map4.put("amount", String.valueOf(Double.parseDouble(fund) + Double.parseDouble(lmap.get((int)_position).get("amount").toString())));
 					myFunds.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(map4);
 					map3 = new HashMap<>();
-					map3.put("type", "Completed Job");
+					if (lmap.get((int)_position).get("type").toString().equals("Claim Payment")) {
+						map3.put("type", "Completed Job");
+					}
+					else {
+						map3.put("type", "Donation Received");
+					}
+					cal = Calendar.getInstance();
 					map3.put("time", String.valueOf((long)(cal.getTimeInMillis())));
 					history.child(lmap.get((int)_position).get("key").toString()).updateChildren(map3);
-					SketchwareUtil.showMessage(getApplicationContext(), "Payout successfull");
+					SketchwareUtil.showMessage(getApplicationContext(), "Payout added to your dashboard funds");
 					recreate();
 				}
 			}
@@ -1061,6 +1067,9 @@ public class DashboardActivity extends AppCompatActivity {
 			}
 			if (lmap.get((int)_position).get("type").toString().equals("Completed Job")) {
 				amount.setTextColor(0xFF34D186);
+			}
+			if (lmap.get((int)_position).get("type").toString().equals("Donation Received")) {
+				amount.setTextColor(0xFFCDDC39);
 			}
 			
 			return _view;

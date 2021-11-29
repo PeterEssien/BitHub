@@ -309,28 +309,6 @@ public class VoicecallActivity extends AppCompatActivity {
 	
 	private void initializeLogic() {
 		_ux();
-		webview1.getSettings().setJavaScriptEnabled(true);
-		webview1.getSettings().setUseWideViewPort(true);
-		webview1.getSettings().setBuiltInZoomControls(true);
-		webview1.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-		webview1.setDownloadListener(new DownloadListener() {
-				public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
-						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setData(Uri.parse(url));
-						startActivity (intent);
-				}
-		});
-		webview1.getSettings().setAppCacheMaxSize(5*1024*1024);
-		webview1.getSettings().setAppCachePath(getApplicationContext().getCacheDir().getAbsolutePath());
-		webview1.getSettings().setAllowFileAccess(true);
-		webview1.getSettings().setAppCacheEnabled(true);
-		webview1.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-		webview1.getSettings().setLoadWithOverviewMode(true);
-		webview1.getSettings().setUseWideViewPort(true);
-		webview1.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-		webview1.getSettings().setDomStorageEnabled(true);
-		webview1.getSettings().setSaveFormData(true);
-		webview1.getSettings().setLoadWithOverviewMode(true); webview1.getSettings().setUseWideViewPort(true); final WebSettings webSettings = webview1.getSettings(); final String newUserAgent; newUserAgent = "Mozilla/5.0 (Android) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"; webSettings.setUserAgentString(newUserAgent);
 		if (1 == 2) {
 			Intent _intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 			_intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
@@ -338,14 +316,19 @@ public class VoicecallActivity extends AppCompatActivity {
 			_intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 			stt.startListening(_intent);
 		}
-		webview1.setWebChromeClient(new WebChromeClient(){
-			    @Override
-			    public void onPermissionRequest(PermissionRequest request){
-				        // Generally you want to check which permissions you are granting
-				        request.grant(request.getResources());
-				    }
+		final String DESKTOP_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36";
+		
+		WebView webView = (WebView) findViewById(R.id.webview1);
+		WebSettings settings = webView.getSettings();
+		settings.setJavaScriptEnabled(true);
+		settings.setDomStorageEnabled(true);
+		settings.setDatabaseEnabled(true);
+		settings.setUserAgentString(DESKTOP_USER_AGENT);
+		settings.setMediaPlaybackRequiresUserGesture(false);
+		webView.setWebChromeClient(new WebChromeClient() { @Override public void onPermissionRequest(PermissionRequest request) { request.grant(request.getResources()); 
+			} 
 		});
-		webview1.loadUrl(getIntent().getStringExtra("videoID"));
+		webView.loadUrl(getIntent().getStringExtra("callid"));
 		stopclock = new Chronometer(this);
 		stopclock.setTextSize(16);
 		stopclock.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/roboto_medium.ttf"), 0);

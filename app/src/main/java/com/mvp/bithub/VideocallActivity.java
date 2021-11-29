@@ -46,7 +46,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ChildEventListener;
 import java.util.HashMap;
-import android.webkit.WebViewClient;
 import javax.activation.*;
 import myjava.awt.datatransfer.*;
 import com.swrevo.gmailapi.*;
@@ -133,7 +132,7 @@ public class VideocallActivity extends AppCompatActivity {
 			@Override
 			public void onPageFinished(WebView _param1, String _param2) {
 				final String _url = _param2;
-				_loading_1_sow(0);
+				
 				super.onPageFinished(_param1, _param2);
 			}
 		});
@@ -247,32 +246,6 @@ public class VideocallActivity extends AppCompatActivity {
 	}
 	
 	private void initializeLogic() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { 
-			Window w = this.getWindow();w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-			w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-			w.setStatusBarColor(0xFFA03890); w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS); }
-		webview1.getSettings().setJavaScriptEnabled(true);
-		webview1.getSettings().setUseWideViewPort(true);
-		webview1.getSettings().setBuiltInZoomControls(true);
-		webview1.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-		webview1.setDownloadListener(new DownloadListener() {
-				public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
-						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setData(Uri.parse(url));
-						startActivity (intent);
-				}
-		});
-		webview1.getSettings().setAppCacheMaxSize(5*1024*1024);
-		webview1.getSettings().setAppCachePath(getApplicationContext().getCacheDir().getAbsolutePath());
-		webview1.getSettings().setAllowFileAccess(true);
-		webview1.getSettings().setAppCacheEnabled(true);
-		webview1.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-		webview1.getSettings().setLoadWithOverviewMode(true);
-		webview1.getSettings().setUseWideViewPort(true);
-		webview1.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-		webview1.getSettings().setDomStorageEnabled(true);
-		webview1.getSettings().setSaveFormData(true);
-		webview1.getSettings().setLoadWithOverviewMode(true); webview1.getSettings().setUseWideViewPort(true); final WebSettings webSettings = webview1.getSettings(); final String newUserAgent; newUserAgent = "Mozilla/5.0 (Android) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"; webSettings.setUserAgentString(newUserAgent);
 		if (1 == 2) {
 			startActivityForResult(cam, REQ_CD_CAM);
 			Intent _intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -281,15 +254,20 @@ public class VideocallActivity extends AppCompatActivity {
 			_intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 			stt.startListening(_intent);
 		}
-		webview1.setWebChromeClient(new WebChromeClient(){
-			    @Override
-			    public void onPermissionRequest(PermissionRequest request){
-				        // Generally you want to check which permissions you are granting
-				        request.grant(request.getResources());
-				    }
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		final String DESKTOP_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36";
+		
+		WebView webView = (WebView) findViewById(R.id.webview1);
+		WebSettings settings = webView.getSettings();
+		settings.setJavaScriptEnabled(true);
+		settings.setDomStorageEnabled(true);
+		settings.setDatabaseEnabled(true);
+		settings.setUserAgentString(DESKTOP_USER_AGENT);
+		settings.setMediaPlaybackRequiresUserGesture(false);
+		webView.setWebChromeClient(new WebChromeClient() { @Override public void onPermissionRequest(PermissionRequest request) { request.grant(request.getResources()); 
+			} 
 		});
-		webview1.loadUrl("https://meet.jit.si/".concat(getIntent().getStringExtra("videoID")).concat(_Decode("I2NvbmZpZy5kaXNhYmxlRGVlcExpbmtpbmc9dHJ1ZQ==\n")));
-		_loading_1_sow(1);
+		webView.loadUrl("https://webview-videocall.herokuapp.com/r/".concat(getIntent().getStringExtra("videoID")));
 	}
 	
 	@Override
@@ -349,56 +327,6 @@ public class VideocallActivity extends AppCompatActivity {
 			 
 		}
 	}
-	public String _Decode(final String _text) {
-		String decoded ="";
-		try {
-			byte[] data = android.util.Base64.decode(_text, android.util.Base64.DEFAULT);
-			decoded = new String(data, "UTF-8");
-			
-		}
-		catch (Exception e) {
-			decoded = "Error : " + e.toString();
-			
-		}
-		return decoded;
-	}
-	
-	
-	public void _loading_1_sow(final double _show_or_not) {
-		try{
-			dia = _show_or_not;
-			
-			final AlertDialog dialog2 = new AlertDialog.Builder(VideocallActivity.this).create();
-			View inflate = getLayoutInflater().inflate(R.layout.custom, null);
-			dialog2.setView(inflate);
-			
-			dialog2.setCancelable(false);
-			
-			
-			
-			
-			
-			dialog2.show();
-			timer = new TimerTask() {
-				@Override
-				public void run() {
-					runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							if (dia == 0) {
-								dialog2.dismiss();
-								timer.cancel();
-							}
-						}
-					});
-				}
-			};
-			_timer.scheduleAtFixedRate(timer, (int)(0), (int)(2000));
-		}catch(Exception e){
-			SketchwareUtil.showMessage(getApplicationContext(), e.toString());
-		}
-	}
-	
 	
 	@Deprecated
 	public void showMessage(String _s) {

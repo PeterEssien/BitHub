@@ -116,6 +116,9 @@ public class HomeActivity extends AppCompatActivity {
 	private HashMap<String, Object> map5 = new HashMap<>();
 	private double placeHolder = 0;
 	private double placeHolder1 = 0;
+	private String fundsUid = "";
+	private String fund1 = "";
+	private String key1 = "";
 	
 	private ArrayList<HashMap<String, Object>> postMap = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> jobMap = new ArrayList<>();
@@ -513,24 +516,60 @@ public class HomeActivity extends AppCompatActivity {
 			@Override
 			public void onItemClick(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
 				final int _position = _param3;
-				i.putExtra("user2", chatmap.get((int)_position).get("uid").toString());
-				i.putExtra("uid", chatmap.get((int)_position).get("uid").toString());
-				i.putExtra("user2name", chatmap.get((int)_position).get("name").toString());
-				i.putExtra("user2pic", chatmap.get((int)_position).get("avatar").toString());
-				i.putExtra("user1pic", myPic);
-				i.putExtra("user1name", username);
-				i.putExtra("email", email);
-				i.putExtra("address", address);
-				i.setClass(getApplicationContext(), ChatActivity.class);
-				startActivity(i);
+				if (chatmap.get((int)_position).get("groupChat").toString().equals("yes")) {
+					i.putExtra("myName", username);
+					i.putExtra("creatorID", chatmap.get((int)_position).get("joinKey").toString());
+					i.putExtra("key", chatmap.get((int)_position).get("key").toString());
+					i.putExtra("visibleLink", chatmap.get((int)_position).get("visibleLink").toString());
+					i.putExtra("groupDescription", chatmap.get((int)_position).get("groupDescription").toString());
+					i.putExtra("groupKey", chatmap.get((int)_position).get("joinKey").toString());
+					i.putExtra("groupName", chatmap.get((int)_position).get("groupName").toString());
+					i.putExtra("groupPic", chatmap.get((int)_position).get("groupPic").toString());
+					i.putExtra("members", chatmap.get((int)_position).get("members").toString());
+					i.setClass(getApplicationContext(), GroupChatActivity.class);
+					startActivity(i);
+				}
+				else {
+					i.putExtra("user2", chatmap.get((int)_position).get("uid").toString());
+					i.putExtra("uid", chatmap.get((int)_position).get("uid").toString());
+					i.putExtra("user2name", chatmap.get((int)_position).get("name").toString());
+					i.putExtra("user2pic", chatmap.get((int)_position).get("avatar").toString());
+					i.putExtra("user1pic", myPic);
+					i.putExtra("user1name", username);
+					i.putExtra("email", email);
+					i.putExtra("address", address);
+					i.setClass(getApplicationContext(), ChatActivity.class);
+					startActivity(i);
+				}
 			}
 		});
 		
 		imageview6.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				i.setClass(getApplicationContext(), BitnobbersActivity.class);
-				startActivity(i);
+				pmenu = new PopupMenu(getApplicationContext(), imageview6);
+				pmenu.getMenu().add("Message");
+				pmenu.getMenu().add("Circles");
+				pmenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
+					@Override
+					public boolean onMenuItemClick(MenuItem menuItem){
+						if (menuItem.getTitle().toString().equals("Message")) {
+							i.setClass(getApplicationContext(), BitnobbersActivity.class);
+							startActivity(i);
+						}
+						else {
+							if (menuItem.getTitle().toString().equals("Circles")) {
+								i.putExtra("myPic", myPic);
+								i.putExtra("myName", username);
+								i.putExtra("myUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+								i.setClass(getApplicationContext(), GroupsActivity.class);
+								startActivity(i);
+							}
+						}
+						return true;
+					}
+				});
+				pmenu.show();
 			}
 		});
 		
@@ -1001,12 +1040,30 @@ public class HomeActivity extends AppCompatActivity {
 				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
 				final String _childKey = _param1.getKey();
 				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				_addChat(_childValue.get("name").toString(), _childValue.get("avatar").toString(), _childValue.get("lastMessage").toString(), _childValue.get("timestamp").toString(), _childValue.get("uid").toString(), _childValue.get("myuid").toString());
-				listview1.setAdapter(new Listview1Adapter(chatmap));
-				((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-				if (_childValue.containsKey("timestamp")) {
-					SketchwareUtil.sortListMap(chatmap, "timestamp", false, false);
-				}
+				recent.addListenerForSingleValueEvent(new ValueEventListener() {
+					@Override
+					public void onDataChange(DataSnapshot _dataSnapshot) {
+						chatmap = new ArrayList<>();
+						try {
+							GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+							for (DataSnapshot _data : _dataSnapshot.getChildren()) {
+								HashMap<String, Object> _map = _data.getValue(_ind);
+								chatmap.add(_map);
+							}
+						}
+						catch (Exception _e) {
+							_e.printStackTrace();
+						}
+						if (_childValue.containsKey("timestamp")) {
+							SketchwareUtil.sortListMap(chatmap, "timestamp", false, false);
+						}
+						listview1.setAdapter(new Listview1Adapter(chatmap));
+						((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
+					}
+					@Override
+					public void onCancelled(DatabaseError _databaseError) {
+					}
+				});
 			}
 			
 			@Override
@@ -1014,12 +1071,30 @@ public class HomeActivity extends AppCompatActivity {
 				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
 				final String _childKey = _param1.getKey();
 				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				_addChat(_childValue.get("name").toString(), _childValue.get("avatar").toString(), _childValue.get("lastMessage").toString(), _childValue.get("timestamp").toString(), _childValue.get("uid").toString(), _childValue.get("myuid").toString());
-				listview1.setAdapter(new Listview1Adapter(chatmap));
-				((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-				if (_childValue.containsKey("timestamp")) {
-					SketchwareUtil.sortListMap(chatmap, "timestamp", false, false);
-				}
+				recent.addListenerForSingleValueEvent(new ValueEventListener() {
+					@Override
+					public void onDataChange(DataSnapshot _dataSnapshot) {
+						chatmap = new ArrayList<>();
+						try {
+							GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+							for (DataSnapshot _data : _dataSnapshot.getChildren()) {
+								HashMap<String, Object> _map = _data.getValue(_ind);
+								chatmap.add(_map);
+							}
+						}
+						catch (Exception _e) {
+							_e.printStackTrace();
+						}
+						if (_childValue.containsKey("timestamp")) {
+							SketchwareUtil.sortListMap(chatmap, "timestamp", false, false);
+						}
+						listview1.setAdapter(new Listview1Adapter(chatmap));
+						((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
+					}
+					@Override
+					public void onCancelled(DatabaseError _databaseError) {
+					}
+				});
 			}
 			
 			@Override
@@ -1218,6 +1293,7 @@ public class HomeActivity extends AppCompatActivity {
 						});
 						b2.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
 								bottomSheetDialog.dismiss();
+								cal = Calendar.getInstance();
 								map2 = new HashMap<>();
 								map2.put("type", "Claim Payment");
 								map2.put("time", String.valueOf((long)(cal.getTimeInMillis())));
@@ -2098,12 +2174,24 @@ public class HomeActivity extends AppCompatActivity {
 										SketchwareUtil.showMessage(getApplicationContext(), "You do not have enough funds, please top up your account by going to your dashboard !");
 									}
 									else {
+										key1 = postMap.get((int)_position).get("uid").toString().concat("-".concat(history.push().getKey()));
 										map5 = new HashMap<>();
 										map5.put("amount", String.valueOf(Double.parseDouble(fund) - Double.parseDouble(amount.getText().toString())));
 										myFunds.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(map5);
 										map5 = new HashMap<>();
-										map5.put("amount", String.valueOf(Double.parseDouble(fund) + Double.parseDouble(amount.getText().toString())));
-										myFunds.child(postMap.get((int)_position).get("uid").toString()).updateChildren(map5);
+										cal = Calendar.getInstance();
+										map5.put("time", String.valueOf((long)(cal.getTimeInMillis())));
+										map5.put("type", "Claim Donation");
+										map5.put("amount", amount.getText().toString());
+										map5.put("name", postMap.get((int)_position).get("username").toString());
+										if (postMap.get((int)_position).containsKey("post")) {
+											map5.put("jobTitle", postMap.get((int)_position).get("post").toString());
+										}
+										else {
+											map5.put("jobTitle", "Donated towards reaching your target");
+										}
+										map5.put("key", key1);
+										history.child(key1).updateChildren(map5);
 										map5 = new HashMap<>();
 										map5.put("progressPrice", String.valueOf(Double.parseDouble(postMap.get((int)_position).get("progressPrice").toString()) + Double.parseDouble(amount.getText().toString())));
 										post.child(postMap.get((int)_position).get("key").toString()).updateChildren(map5);
@@ -2257,9 +2345,9 @@ public class HomeActivity extends AppCompatActivity {
 				title.setText(chatmap.get((int)_position).get("name").toString());
 			}
 			if (chatmap.get((int)_position).containsKey("myuid")) {
-				if (chatmap.get((int)_position).containsKey("msg")) {
+				if (chatmap.get((int)_position).containsKey("lastMessage")) {
 					if (chatmap.get((int)_position).get("myuid").toString().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-						text.setText("You: ".concat(chatmap.get((int)_position).get("msg").toString()));
+						text.setText("You: ".concat(chatmap.get((int)_position).get("lastMessage").toString()));
 						SpannableStringBuilder spannable = new SpannableStringBuilder(text.getText().toString());
 						spannable.setSpan(
 						    new ForegroundColorSpan(0xFF24FEB7),
@@ -2270,7 +2358,7 @@ public class HomeActivity extends AppCompatActivity {
 						text.setText(spannable);
 					}
 					else {
-						text.setText(chatmap.get((int)_position).get("msg").toString());
+						text.setText(chatmap.get((int)_position).get("lastMessage").toString());
 					}
 				}
 			}

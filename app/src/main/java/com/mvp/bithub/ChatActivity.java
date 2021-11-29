@@ -255,12 +255,12 @@ public class ChatActivity extends AppCompatActivity {
 				b2.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
 						dialog1.dismiss();
 						map5 = new HashMap<>();
-						map5.put("videoID", "null");
+						map5.put("callid", "https://peteressien.github.io/webrtc-sdk/?call=".concat(FirebaseAuth.getInstance().getCurrentUser().getUid().concat("&number=").concat(getIntent().getStringExtra("user2"))));
 						voicecall.child(FirebaseAuth.getInstance().getCurrentUser().getUid().concat("-".concat(getIntent().getStringExtra("user2")))).updateChildren(map5);
 						i.putExtra("key", FirebaseAuth.getInstance().getCurrentUser().getUid().concat("-".concat(getIntent().getStringExtra("user2"))));
 						i.putExtra("user2name", getIntent().getStringExtra("user2name"));
 						i.putExtra("user2pic", getIntent().getStringExtra("user2pic"));
-						i.putExtra("videoID", "https://peteressien.github.io/webrtc-sdk/?number=".concat(FirebaseAuth.getInstance().getCurrentUser().getUid()));
+						i.putExtra("callid", "https://peteressien.github.io/webrtc-sdk/?number=".concat(FirebaseAuth.getInstance().getCurrentUser().getUid()));
 						i.setClass(getApplicationContext(), VoicecallActivity.class);
 						startActivity(i);
 					}
@@ -304,9 +304,9 @@ public class ChatActivity extends AppCompatActivity {
 				b2.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
 						dialog1.dismiss();
 						map5 = new HashMap<>();
-						map5.put("videoID", FirebaseAuth.getInstance().getCurrentUser().getUid().concat("-".concat(getIntent().getStringExtra("user2"))));
+						map5.put("videoID", FirebaseAuth.getInstance().getCurrentUser().getUid());
 						videocall.child(FirebaseAuth.getInstance().getCurrentUser().getUid().concat("-".concat(getIntent().getStringExtra("user2")))).updateChildren(map5);
-						i.putExtra("videoID", FirebaseAuth.getInstance().getCurrentUser().getUid().concat("-".concat(getIntent().getStringExtra("user2"))));
+						i.putExtra("videoID", FirebaseAuth.getInstance().getCurrentUser().getUid());
 						i.setClass(getApplicationContext(), VideocallActivity.class);
 						startActivity(i);
 					}
@@ -982,9 +982,20 @@ public class ChatActivity extends AppCompatActivity {
 					b2.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
 							dialog1.dismiss();
 							videocall.child(getIntent().getStringExtra("user2").concat("-".concat(FirebaseAuth.getInstance().getCurrentUser().getUid()))).removeValue();
-							i.putExtra("videoID", _childValue.get("videoID").toString());
-							i.setClass(getApplicationContext(), VideocallActivity.class);
-							startActivity(i);
+							t = new TimerTask() {
+								@Override
+								public void run() {
+									runOnUiThread(new Runnable() {
+										@Override
+										public void run() {
+											i.putExtra("videoID", _childValue.get("videoID").toString());
+											i.setClass(getApplicationContext(), VideocallActivity.class);
+											startActivity(i);
+										}
+									});
+								}
+							};
+							_timer.schedule(t, (int)(1000));
 						}
 					});
 					dialog1.setCancelable(true);
@@ -1061,12 +1072,23 @@ public class ChatActivity extends AppCompatActivity {
 					b2.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
 							dialog1.dismiss();
 							videocall.child(getIntent().getStringExtra("user2").concat("-".concat(FirebaseAuth.getInstance().getCurrentUser().getUid()))).removeValue();
-							i.putExtra("key", getIntent().getStringExtra("user2").concat("-".concat(FirebaseAuth.getInstance().getCurrentUser().getUid())));
-							i.putExtra("user2name", getIntent().getStringExtra("user2name"));
-							i.putExtra("user2pic", getIntent().getStringExtra("user2pic"));
-							i.putExtra("videoID", "https://peteressien.github.io/webrtc-sdk/?call=".concat(getIntent().getStringExtra("user2").concat("&number=").concat(FirebaseAuth.getInstance().getCurrentUser().getUid())));
-							i.setClass(getApplicationContext(), VoicecallActivity.class);
-							startActivity(i);
+							t = new TimerTask() {
+								@Override
+								public void run() {
+									runOnUiThread(new Runnable() {
+										@Override
+										public void run() {
+											i.putExtra("key", getIntent().getStringExtra("user2").concat("-".concat(FirebaseAuth.getInstance().getCurrentUser().getUid())));
+											i.putExtra("user2name", getIntent().getStringExtra("user2name"));
+											i.putExtra("user2pic", getIntent().getStringExtra("user2pic"));
+											i.putExtra("callid", _childValue.get("callid").toString());
+											i.setClass(getApplicationContext(), VoicecallActivity.class);
+											startActivity(i);
+										}
+									});
+								}
+							};
+							_timer.schedule(t, (int)(1000));
 						}
 					});
 					dialog1.setCancelable(true);
@@ -1217,10 +1239,12 @@ public class ChatActivity extends AppCompatActivity {
 		Chat2.addChildEventListener(_Chat2_child_listener);
 		android.view.inputmethod.InputMethodManager imm = (android.view.inputmethod.InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE); imm.hideSoftInputFromWindow(edittext1.getWindowToken(), 0);
 		_setUserStatus("Online");
-		linear22.setVisibility(View.GONE);
-		empty_msg.setVisibility(View.GONE);
 		videocall.addChildEventListener(_videocall_child_listener);
 		voicecall.addChildEventListener(_voicecall_child_listener);
+		linear22.setVisibility(View.GONE);
+		if (maplist.size() > 0) {
+			empty_msg.setVisibility(View.GONE);
+		}
 	}
 	
 	@Override
@@ -1278,8 +1302,8 @@ public class ChatActivity extends AppCompatActivity {
 	
 	
 	public void _Send() {
-		empty_msg.setVisibility(View.GONE);
 		if (edittext1.getText().toString().length() > 0) {
+			empty_msg.setVisibility(View.GONE);
 			now = Calendar.getInstance();
 			map = new HashMap<>();
 			map.put("username", FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -1319,6 +1343,7 @@ public class ChatActivity extends AppCompatActivity {
 		}
 		getchat.put("myuid", FirebaseAuth.getInstance().getCurrentUser().getUid());
 		getchat.put("timestamp", String.valueOf((long)(cal.getTimeInMillis())));
+		getchat.put("groupChat", "no");
 		recent.child(FirebaseAuth.getInstance().getCurrentUser().getUid().concat("/".concat(getIntent().getStringExtra("user2")))).updateChildren(getchat);
 		getchat = new HashMap<>();
 		getchat.put("uid", FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -1337,6 +1362,7 @@ public class ChatActivity extends AppCompatActivity {
 		}
 		getchat.put("myuid", FirebaseAuth.getInstance().getCurrentUser().getUid());
 		getchat.put("timestamp", String.valueOf((long)(cal.getTimeInMillis())));
+		getchat.put("groupChat", "no");
 		recent.child(getIntent().getStringExtra("user2").concat("/".concat(FirebaseAuth.getInstance().getCurrentUser().getUid()))).updateChildren(getchat);
 		getchat.clear();
 	}
@@ -1504,8 +1530,10 @@ public class ChatActivity extends AppCompatActivity {
 			
 			final LinearLayout left = _view.findViewById(R.id.left);
 			final LinearLayout right = _view.findViewById(R.id.right);
+			final TextView name_left = _view.findViewById(R.id.name_left);
 			final TextView text_left = _view.findViewById(R.id.text_left);
 			final TextView date_left = _view.findViewById(R.id.date_left);
+			final TextView name_right = _view.findViewById(R.id.name_right);
 			final TextView text_right = _view.findViewById(R.id.text_right);
 			final TextView date_right = _view.findViewById(R.id.date_right);
 			
@@ -1513,6 +1541,8 @@ public class ChatActivity extends AppCompatActivity {
 			date_left.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/sofiapro_regular.ttf"), 0);
 			text_right.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/en_light.ttf"), 0);
 			date_right.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/sofiapro_regular.ttf"), 0);
+			name_left.setVisibility(View.GONE);
+			name_right.setVisibility(View.GONE);
 			left.setMinimumWidth(280);
 			right.setMinimumWidth(280);
 			if (maplist.get((int)_position).containsKey("text")) {
