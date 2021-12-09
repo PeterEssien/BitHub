@@ -112,7 +112,7 @@ Meet the team responsible [for making this project](https://bithubapp.herokuapp.
 
 ### TODO 
 ##### Due to the limited time and nature of the Hackerthon which states we create an MVP here is what i intend on adding later
-- [ ] Create polls & podcast
+- [ ] Livecast (This feature has been added but we cannot confirm if it works)
 - [x] Users can create both private and public chat groups
 - [ ] Make project cross platform (IOS & Web Version)
 - [x] Add ability to comments on post
